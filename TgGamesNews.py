@@ -4,15 +4,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_id = int(os.getenv('api_id'))
-api_hash = os.getenv('api_hash')
+API_ID = int(os.getenv('API_ID'))
+API_HASH = os.getenv('API_HASH')
+MY_CHANNEL = os.getenv('MY_CHANNEL')
+CHANNELS = os.getenv('CHANNELS')
 
-client = TelegramClient("Новости", api_id, api_hash)
+client = TelegramClient("Новости", API_ID, API_HASH)
 
 
-@client.on(events.NewMessage(chats=-1003855576691))
+@client.on(events.NewMessage(CHANNELS))
 async def handler(event):
-    await event.forward_to(-1003752567374)
+    await event.forward_to(MY_CHANNEL)
 
 
 client.start()
